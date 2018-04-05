@@ -48,18 +48,18 @@ a \code{\link{tibble}}, with rows representing bugs and the following
   \item{product}{Product where the bug occurs (\code{character}).}
   \item{component}{Which part of the product is affected? (\code{character})}
   \item{assignee}{To whom is the bug assigned? (\code{character})}
-  \item{status}{Status of bug (\code{character}): \code{"UNCONFIRMED"},
-    \code{"NEW"}, \code{"CLOSED"}, \ldots}
+  \item{status}{Abbreviated status of bug (\code{character}):
+    \code{"UNCO"}(NFIRMED), \code{"NEW"}, \code{"CLOS"}(ED), \ldots}
   \item{resolution}{Together with \code{"status"}, defines the current state
-    of the bug: \code{"FIXED"}, \code{"WONTFIX"}, \code{"WORKSFORME"},
-    \code{"INVALID"}, \ldots}
+    of the bug: \code{"FIXE"}(D), \code{"WONT"}(FIX), \code{"WORK"}(SFORME),
+    \code{"INVA"}(LID), \ldots}
   \item{changed}{(Date and) time of last change (\code{character}). The
     format may be irregular.}
 }
 \description{
 Shows the \acronym{ID}s, short descriptions (summaries), and other
 information about bugs in a Bugzilla database. The bugs can be filtered by
-status and date of last change.  By default, the R bug tracker is queried.
+status and date of last change. By default, the R bug tracker is queried.
 }
 \details{
 The \code{category} option accepts a number of choices. The default
@@ -88,6 +88,12 @@ properties of each bug: \code{"importance"} uses \code{"priority"} and
 \code{"severity"} (in this order), whereas with \code{"assignee"} the sort
 order is primarily based on the person to whom the bug is assigned to, but
 also on the bug status, priority and \acronym{ID} (in this order).
+
+This function extracts information from an \acronym{HTML} document
+presenting the bug list. Therefore some results are presented in an
+abbreviated form. More detailed information about selected bugs can
+be obtained with \code{\link{bug_info}} and
+\code{\link{bug_history}}.
 }
 \examples{
 \dontrun{
