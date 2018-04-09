@@ -4,15 +4,11 @@
 \alias{bug_history}
 \title{Get Change History of Bug}
 \usage{
-bug_history(bug_id,
-  base_url = "https://bugs.r-project.org/bugzilla3/rest/bug/",
-  new_since = NULL)
+bug_history(bug_id, new_since = NULL,
+  base_url = "https://bugs.r-project.org/bugzilla3/rest/bug/")
 }
 \arguments{
 \item{bug_id}{\acronym{ID} or alias of one bug (numeric or \code{character}).}
-
-\item{base_url}{\acronym{URL} to Bugzilla \acronym{REST} \acronym{API}
-(bug history). Defaults to R Bugzilla.}
 
 \item{new_since}{Discard changes older than this. A \code{character} string
 with date in format \verb{YYYY-MM-DD} or date and time as
@@ -22,6 +18,9 @@ with date in format \verb{YYYY-MM-DD} or date and time as
 being used. The standard \link[=DateTimeClasses]{date-time classes} are
 also supported. Numeric values are accepted and interpreted as number of
 days relative to the current date. The default \code{NULL} means no limit.}
+
+\item{base_url}{\acronym{URL} to Bugzilla \acronym{REST} \acronym{API}
+(bug history). Defaults to R Bugzilla.}
 }
 \value{
 a \code{\link{tibble}}, with rows representing historical changes to

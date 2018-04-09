@@ -2,3 +2,4 @@
 ^.*\.Rproj$
 ^appveyor\.yml$
 
+^\.Rproj\.user$

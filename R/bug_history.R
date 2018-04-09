@@ -11,8 +11,6 @@
 #' will show duplicated values in the \code{"when"} and \code{"who"} columns.
 #'
 #' @param bug_id \acronym{ID} or alias of one bug (numeric or \code{character}).
-#' @param base_url \acronym{URL} to Bugzilla \acronym{REST} \acronym{API}
-#'   (bug history). Defaults to R Bugzilla.
 #' @param new_since Discard changes older than this. A \code{character} string
 #'   with date in format \verb{YYYY-MM-DD} or date and time as
 #'   \verb{YYYY-MM-DDTHH24:MI:SSZ}. The latter is year-month-date, letter
@@ -21,6 +19,8 @@
 #'   being used. The standard \link[=DateTimeClasses]{date-time classes} are
 #'   also supported. Numeric values are accepted and interpreted as number of
 #'   days relative to the current date. The default \code{NULL} means no limit.
+#' @param base_url \acronym{URL} to Bugzilla \acronym{REST} \acronym{API}
+#'   (bug history). Defaults to R Bugzilla.
 #' @importFrom httr RETRY accept_json content stop_for_status
 #' @importFrom tibble tibble
 #' @importFrom lubridate ymd_hms
@@ -40,9 +40,8 @@
 #' \dontrun{
 #' hist1 <- bug_history(1)
 #' }
-bug_history <- function(bug_id,
-                        base_url = "https://bugs.r-project.org/bugzilla3/rest/bug/",
-                        new_since = NULL) {
+bug_history <- function(bug_id, new_since = NULL,
+                        base_url = "https://bugs.r-project.org/bugzilla3/rest/bug/") {
     stopifnot(is.numeric(bug_id) || is.character(bug_id), !is.na(bug_id),
               length(bug_id) == 1L)
     stopifnot(is.character(base_url), length(base_url) == 1L,
