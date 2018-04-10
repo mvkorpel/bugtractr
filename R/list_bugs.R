@@ -63,7 +63,7 @@
 #'   Bugzilla.
 #' @importFrom tibble lst tibble
 #' @importFrom httr RETRY accept content stop_for_status
-#' @importFrom xml2 xml_find_all xml_text xml_attr url_absolute
+#' @importFrom xml2 xml_find_all xml_text xml_attr url_absolute url_escape
 #' @importFrom stringr str_trim str_replace str_replace_all fixed
 #' @importFrom lubridate ymd_hms
 #' @export
@@ -181,8 +181,8 @@ list_bugs <- function(category = c("open", "closed", "other", "all"),
           paste0("bug_status=", status2, collapse = "&"),
           "&bugidtype=include",
           if (have_from) paste0("&chfieldfrom=", changed_from2),
-          if (have_product) paste0("&product=", product),
-          if (have_component) paste0("&component=", component),
+          if (have_product) paste0("&product=", url_escape(product)),
+          if (have_component) paste0("&component=", url_escape(component)),
           "&chfieldto=", changed_to2,
           "&emailassigned_to1=1&emailassigned_to2=1",
           "&emailcc2=1&emailreporter2=1&emailtype1=substring",
