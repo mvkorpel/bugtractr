@@ -47,6 +47,9 @@
 #'   \code{NULL} (the default) means no limit. See \sQuote{Details}.
 #' @param changed_to Like \code{changed_from}, but this is the other endpoint.
 #'   Defaults to the present (no limit).
+#' @param product An optional \code{character} string which limits the bug list
+#'   to a single product.
+#' @param component Like \code{product}, but only show a single component.
 #' @param sorting A \code{character} string stating the desired sorting of the
 #'   results. The default \code{"changed"} orders according to the date and time
 #'   of last change, while \code{"id"} uses the numerical order of the bug
@@ -102,6 +105,7 @@
 #' }
 list_bugs <- function(category = c("open", "closed", "other", "all"),
                       status = NULL, changed_from = NULL, changed_to = "Now",
+                      product = NULL, component = NULL,
                       sorting = c("changed", "id", "importance", "assignee",
                                   "priority", "severity"),
                       reverse = match.arg(sorting) == "changed",
@@ -130,6 +134,16 @@ list_bugs <- function(category = c("open", "closed", "other", "all"),
         changed_from2 <- process_date(changed_from)
     } else {
         changed_from2 <- NULL
+    }
+    have_product <- !is.null(product)
+    if (have_product) {
+        stopifnot(is.character(product), length(product) == 1L,
+                  !is.na(product))
+    }
+    have_component <- !is.null(component)
+    if (have_component) {
+        stopifnot(is.character(component), length(component) == 1L,
+                  !is.na(component))
     }
     changed_to2 <- process_date(changed_to)
     if (is.null(status)) {
@@ -167,6 +181,8 @@ list_bugs <- function(category = c("open", "closed", "other", "all"),
           paste0("bug_status=", status2, collapse = "&"),
           "&bugidtype=include",
           if (have_from) paste0("&chfieldfrom=", changed_from2),
+          if (have_product) paste0("&product=", product),
+          if (have_component) paste0("&component=", component),
           "&chfieldto=", changed_to2,
           "&emailassigned_to1=1&emailassigned_to2=1",
           "&emailcc2=1&emailreporter2=1&emailtype1=substring",

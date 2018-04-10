@@ -5,9 +5,9 @@
 \title{List Bugs in a Bugzilla Database}
 \usage{
 list_bugs(category = c("open", "closed", "other", "all"), status = NULL,
-  changed_from = NULL, changed_to = "Now", sorting = c("changed", "id",
-  "importance", "assignee", "priority", "severity"),
-  reverse = match.arg(sorting) == "changed",
+  changed_from = NULL, changed_to = "Now", product = NULL,
+  component = NULL, sorting = c("changed", "id", "importance", "assignee",
+  "priority", "severity"), reverse = match.arg(sorting) == "changed",
   base_url = "https://bugs.r-project.org/bugzilla3/buglist.cgi")
 }
 \arguments{
@@ -24,6 +24,11 @@ date and time of the bug. This is the start of the search interval.
 
 \item{changed_to}{Like \code{changed_from}, but this is the other endpoint.
 Defaults to the present (no limit).}
+
+\item{product}{An optional \code{character} string which limits the bug list
+to a single product.}
+
+\item{component}{Like \code{product}, but only show a single component.}
 
 \item{sorting}{A \code{character} string stating the desired sorting of the
 results. The default \code{"changed"} orders according to the date and time
