@@ -22,3 +22,6 @@ After installing the package, see the help pages of the following functions:
 - `list_changed()`. List reports opened or closed in a given period.
 - `bug_info()`. Get information about selected bugs.
 - `bug_history()`. Get the change history of a bug.
+- `attachment_info()`. Get attachment metadata.
+- `attachment_data()`. Get files attached to bug reports.
+- `attachment_flags()`. Get flags in attachment metadata.
