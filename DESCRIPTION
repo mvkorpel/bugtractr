@@ -1,14 +1,14 @@
 Package: bugtractr
 Type: Package
 Title: Extract Data from Bugzilla Bug Tracker
-Version: 0.7
-Date: 2018-04-10
+Version: 0.8
+Date: 2018-05-16
 Authors@R: c(person("Mikko", "Korpela", role = c("aut", "cph", "cre"),
                     email = "mvkorpel@iki.fi"))
 Author: Mikko Korpela [aut, cph, cre]
 Maintainer: Mikko Korpela <mvkorpel@iki.fi>
 Depends: R (>= 3.1.0)
-Imports: httr (>= 1.2.0), lubridate (>= 1.7.0), stringr (>= 0.4),
+Imports: base64enc, httr (>= 1.3.0), lubridate (>= 1.7.0), stringr (>= 0.4),
         tibble (>= 1.3.0), xml2
 Description: List bugs by status, and get more information about selected bugs.
     The functions default to querying the R Bugzilla server but may also work

@@ -144,7 +144,8 @@ bug_info <- function(bug_ids,
                paste0("ids=", bug_ids2, collapse = "&"),
                "&",
                paste0("include_fields=", include_fields, collapse = "&"))
-    bug_get <- stop_for_status(RETRY("GET", bug_url, accept_json()))
+    bug_get <- stop_for_status(RETRY("GET", bug_url, accept_json(),
+                                     terminate_on = .terminate_on))
     bug_content <- content(bug_get)
 
     if (isTRUE(bug_content[["error"]])) {
@@ -157,8 +158,9 @@ bug_info <- function(bug_ids,
                            "ids=", bug_ids2[k], "&",
                            paste0("include_fields=", include_fields,
                                   collapse = "&"))
-                bug_get2 <- stop_for_status(RETRY("GET", bug_url2,
-                                                  accept_json()))
+                bug_get2 <-
+                    stop_for_status(RETRY("GET", bug_url2, accept_json(),
+                                          terminate_on = .terminate_on))
                 bug_content2 <- content(bug_get2)
                 if (isTRUE(bug_content2[["error"]])) {
                     failed[k] <- TRUE
@@ -178,8 +180,9 @@ bug_info <- function(bug_ids,
                     paste0(base_url2,
                            "ids=", bug_ids2[k], "&",
                            paste0("include_fields=", set_l, collapse = "&"))
-                bug_get3 <- stop_for_status(RETRY("GET", bug_url3,
-                                                  accept_json()))
+                bug_get3 <-
+                    stop_for_status(RETRY("GET", bug_url3, accept_json(),
+                                          terminate_on = .terminate_on))
                 bug_content3 <- content(bug_get3)
                 if (isTRUE(bug_content3[["error"]])) {
                     if (n_fields[l] > 2L) {
@@ -191,7 +194,8 @@ bug_info <- function(bug_ids,
                                        "&include_fields=", set_l[m])
                             bug_get4 <-
                                 stop_for_status(RETRY("GET", bug_url4,
-                                                      accept_json()))
+                                                      accept_json(),
+                                                      terminate_on = .terminate_on))
                             bug_content4 <- content(bug_get4)
                             if (isTRUE(bug_content4[["error"]])) {
                                 failed2[m] <- TRUE

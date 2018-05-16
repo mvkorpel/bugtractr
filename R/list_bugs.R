@@ -192,7 +192,8 @@ list_bugs <- function(category = c("open", "closed", "other", "all"),
           "&order=", sorting3,
           "&limit=0")
     bug_url <- paste0(bug_url, collapse = "")
-    bug_get <- stop_for_status(RETRY("GET", bug_url, accept("text/html")))
+    bug_get <- stop_for_status(RETRY("GET", bug_url, accept("text/html"),
+                                     terminate_on = .terminate_on))
     bug_content <- content(bug_get)
     bug_summary_a <-
         xml_find_all(bug_content,

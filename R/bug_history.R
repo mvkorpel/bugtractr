@@ -67,7 +67,8 @@ bug_history <- function(bug_id, new_since = NULL,
     }
     bug_url <- paste0(base_url, bug_id, "/history",
                       if (have_since) paste0("?new_since=", new_since2))
-    bug_get <- stop_for_status(RETRY("GET", bug_url, accept_json()))
+    bug_get <- stop_for_status(RETRY("GET", bug_url, accept_json(),
+                                     terminate_on = .terminate_on))
     bug_content <- content(bug_get)
     bug_history <- bug_content[["bugs"]][[1]][["history"]]
     changes <- lapply(bug_history, `[[`, "changes")
