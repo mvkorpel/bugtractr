@@ -4,9 +4,15 @@
 \alias{attachment_data}
 \title{Get Files Attached to Bug Reports}
 \usage{
-attachment_data(bug_id, attachment_id = NULL, obsolete = FALSE,
-  patch_only = FALSE, output_dir = NULL, output_file = NULL,
-  base_url = "https://bugs.r-project.org/bugzilla3/rest/bug/")
+attachment_data(
+  bug_id,
+  attachment_id = NULL,
+  obsolete = FALSE,
+  patch_only = FALSE,
+  output_dir = NULL,
+  output_file = NULL,
+  base_url = "https://bugs.r-project.org/bugzilla3/rest/bug/"
+)
 }
 \arguments{
 \item{bug_id}{\acronym{ID} of one bug (numeric or \code{character}).}

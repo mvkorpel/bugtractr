@@ -39,6 +39,9 @@
 #'
 #' @param category A \code{character} string: what kind of bugs should be
 #'   listed? See \sQuote{Details}.
+#' @param limit A non-negative integer limiting the number of bugs to show.
+#'   Zero means no limit. The default is 500. There have been issues with
+#'   large numbers, including the no-limit setting.
 #' @param status An optional \code{character} vector. If set, overrides
 #'   \code{category} and defines the exact values for accepted bug status.
 #' @param changed_from Optional \code{character} string, date-time object of
@@ -104,6 +107,7 @@
 #' bugs4 <- list_bugs(status = "ASSIGNED")
 #' }
 list_bugs <- function(category = c("open", "closed", "other", "all"),
+                      limit = 500,
                       status = NULL, changed_from = NULL, changed_to = "Now",
                       product = NULL, component = NULL,
                       sorting = c("changed", "id", "importance", "assignee",
@@ -159,6 +163,8 @@ list_bugs <- function(category = c("open", "closed", "other", "all"),
                   !is.na(status), nzchar(status))
         status2 <- status
     }
+    stopifnot(is.numeric(limit), length(limit) == 1L, is.finite(limit),
+              limit >= 0, round(limit) == limit)
     k_sorting <- c(changed = "changeddate",
                    id = "bug_id",
                    importance = "priority%2Cbug_severity",
@@ -176,21 +182,14 @@ list_bugs <- function(category = c("open", "closed", "other", "all"),
                    "%20DESC")
     }
     bug_url <-
-        c(base_url,
-          "?bug_file_loc_type=allwordssubstr&",
+        c(base_url, "?",
           paste0("bug_status=", status2, collapse = "&"),
-          "&bugidtype=include",
           if (have_from) paste0("&chfieldfrom=", changed_from2),
           if (have_product) paste0("&product=", url_escape(product)),
           if (have_component) paste0("&component=", url_escape(component)),
           "&chfieldto=", changed_to2,
-          "&emailassigned_to1=1&emailassigned_to2=1",
-          "&emailcc2=1&emailreporter2=1&emailtype1=substring",
-          "&emailtype2=substring&field0-0-0=noop&long_desc_type=substring",
-          "&query_format=advanced&short_desc_type=allwordssubstr",
-          "&type0-0-0=noop",
           "&order=", sorting3,
-          "&limit=0")
+          sprintf("&limit=%d", limit))
     bug_url <- paste0(bug_url, collapse = "")
     bug_get <- stop_for_status(RETRY("GET", bug_url, accept("text/html"),
                                      terminate_on = .terminate_on))

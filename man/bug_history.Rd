@@ -4,8 +4,11 @@
 \alias{bug_history}
 \title{Get Change History of Bug}
 \usage{
-bug_history(bug_id, new_since = NULL,
-  base_url = "https://bugs.r-project.org/bugzilla3/rest/bug/")
+bug_history(
+  bug_id,
+  new_since = NULL,
+  base_url = "https://bugs.r-project.org/bugzilla3/rest/bug/"
+)
 }
 \arguments{
 \item{bug_id}{\acronym{ID} or alias of one bug (numeric or \code{character}).}

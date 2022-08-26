@@ -4,9 +4,14 @@
 \alias{list_changed}
 \title{List Bugzilla Reports Opened or Closed in a Given Period}
 \usage{
-list_changed(type = c("opened", "opened_confirmed", "closed", "closed_fixed"),
-  from = to - 120 - 7 * 24 * 3600, to = Sys.time() + 60,
-  exclude_components = "Wishlist", list_url = NULL, info_url = NULL)
+list_changed(
+  type = c("opened", "opened_confirmed", "closed", "closed_fixed"),
+  from = to - 120 - 7 * 24 * 3600,
+  to = Sys.time() + 60,
+  exclude_components = "Wishlist",
+  list_url = NULL,
+  info_url = NULL
+)
 }
 \arguments{
 \item{type}{Type of changes to list (\code{character}). See \sQuote{Details}.}

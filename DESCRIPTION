@@ -1,8 +1,8 @@
 Package: bugtractr
 Type: Package
 Title: Extract Data from Bugzilla Bug Tracker
-Version: 0.8
-Date: 2018-05-16
+Version: 0.9
+Date: 2022-08-26
 Authors@R: c(person("Mikko", "Korpela", role = c("aut", "cph", "cre"),
                     email = "mvkorpel@iki.fi"))
 Author: Mikko Korpela [aut, cph, cre]
@@ -16,4 +16,4 @@ Description: List bugs by status, and get more information about selected bugs.
 License: GPL (>= 2)
 URL: https://github.com/mvkorpel/bugtractr
 Encoding: UTF-8
-RoxygenNote: 6.0.1
+RoxygenNote: 7.2.1

@@ -4,8 +4,10 @@
 \alias{attachment_flags}
 \title{Get Flags in Attachment Metadata}
 \usage{
-attachment_flags(attachment_id,
-  base_url = "https://bugs.r-project.org/bugzilla3/rest/bug/")
+attachment_flags(
+  attachment_id,
+  base_url = "https://bugs.r-project.org/bugzilla3/rest/bug/"
+)
 }
 \arguments{
 \item{attachment_id}{\acronym{ID} of one attachment (numeric or

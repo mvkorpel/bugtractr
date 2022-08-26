@@ -4,15 +4,26 @@
 \alias{list_bugs}
 \title{List Bugs in a Bugzilla Database}
 \usage{
-list_bugs(category = c("open", "closed", "other", "all"), status = NULL,
-  changed_from = NULL, changed_to = "Now", product = NULL,
-  component = NULL, sorting = c("changed", "id", "importance", "assignee",
-  "priority", "severity"), reverse = match.arg(sorting) == "changed",
-  base_url = "https://bugs.r-project.org/bugzilla3/buglist.cgi")
+list_bugs(
+  category = c("open", "closed", "other", "all"),
+  limit = 500,
+  status = NULL,
+  changed_from = NULL,
+  changed_to = "Now",
+  product = NULL,
+  component = NULL,
+  sorting = c("changed", "id", "importance", "assignee", "priority", "severity"),
+  reverse = match.arg(sorting) == "changed",
+  base_url = "https://bugs.r-project.org/bugzilla3/buglist.cgi"
+)
 }
 \arguments{
 \item{category}{A \code{character} string: what kind of bugs should be
 listed? See \sQuote{Details}.}
+
+\item{limit}{A non-negative integer limiting the number of bugs to show.
+Zero means no limit. The default is 500. There have been issues with
+large numbers, including the no-limit setting.}
 
 \item{status}{An optional \code{character} vector. If set, overrides
 \code{category} and defines the exact values for accepted bug status.}

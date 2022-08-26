@@ -4,9 +4,13 @@
 \alias{attachment_info}
 \title{Get Attachment Metadata}
 \usage{
-attachment_info(bug_id, attachment_id = NULL, obsolete = FALSE,
+attachment_info(
+  bug_id,
+  attachment_id = NULL,
+  obsolete = FALSE,
   patch_only = FALSE,
-  base_url = "https://bugs.r-project.org/bugzilla3/rest/bug/")
+  base_url = "https://bugs.r-project.org/bugzilla3/rest/bug/"
+)
 }
 \arguments{
 \item{bug_id}{\acronym{ID} of one bug (numeric or \code{character}).}

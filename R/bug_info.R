@@ -17,13 +17,11 @@
 #'   representing their properties:
 #'   \item{id}{Unique bug \code{ID} (\code{integer}).}
 #'   \item{summary}{Short description of bug (\code{character}).}
-#'   \item{creator}{Who created the bug report? (name followed by email in angle
-#'     brackets, \code{character})}
+#'   \item{creator}{Who created the bug report? (name, \code{character})}
 #'   \item{is_open}{Is the bug open? (\code{logical})}
 #'   \item{product}{Product where the bug occurs (\code{character}).}
 #'   \item{component}{Which part of the product is affected? (\code{character})}
-#'   \item{assignee}{To whom is the bug assigned? (name followed by email in
-#'     angle brackets, \code{character})}
+#'   \item{assignee}{To whom is the bug assigned? (name, \code{character})}
 #'   \item{status}{Status of bug (\code{character}): \code{"UNCONFIRMED"},
 #'     \code{"NEW"}, \code{"CLOSED"}, \ldots}
 #'   \item{is_confirmed}{Has the bug been confirmed? (\code{logical})}
@@ -51,9 +49,8 @@
 #'   \item{blocks}{A list of bugs which cannot be solved before this one.
 #'     Formatted like \code{"depends_on"}.}
 #'   \item{cc}{List of interested parties subscribed to updates about the bug
-#'     report. A \code{character} string, with people separated by \code{";"}.
-#'     Each person is shown as a name followed by an email address in angle
-#'     brackets. Possibly empty \code{""}.}
+#'     report. A \code{character} string, with people (names only) separated
+#'     by \code{";"}. Possibly empty \code{""}.}
 #'   \item{see_also}{List of \acronym{URL}s pointing to related bug reports.
 #'     Uses the space \code{" "} as separator. Possibly empty \code{""}.}
 #'   \item{dupe_of}{If the bug report is a duplicate of a previous issue, this
@@ -227,18 +224,14 @@ bug_info <- function(bug_ids,
         if (is.character(x)) {
             x
         } else {
-            paste0(str_trim(paste(vapply(x, `[[`, "", "real_name"),
-                                  vapply(x, `[[`, "", "email"), sep = " <"),
-                            side = "left"),
-                   if (length(x) > 0L) ">", collapse = ";")
+            paste0(vapply(x, `[[`, "", "real_name"), collapse = ";")
         }
     }
     creator_func <- function (x) {
         if (is.character(x)) {
             x
         } else {
-            str_trim(paste0(x[["real_name"]], " <", x[["email"]], ">"),
-                     side = "left")
+            x[["real_name"]]
         }
     }
     dupe_func <- function (x) {
